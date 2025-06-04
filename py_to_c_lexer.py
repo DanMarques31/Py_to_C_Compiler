@@ -21,7 +21,7 @@ class PythonToCLexer:
             'else': 'else',
             'elif': 'else if',
             'while': 'while',
-            'in': 'in'  # ✅ adicionado aqui
+            'in': 'in'
         }
 
         self.operator_descriptions = {

@@ -11,16 +11,23 @@ class Parser:
         else:
             self.current_token = None
 
+    def error(self, mensagem):
+        if self.current_token:
+            _, valor, linha, coluna = self.current_token
+            raise SyntaxError(f"{mensagem} na linha {linha}, coluna {coluna}")
+        else:
+            raise SyntaxError(f"{mensagem} no final do arquivo")
+
     def expect(self, tipo_esperado, valor_esperado=None):
         if self.current_token and self.current_token[0] == tipo_esperado:
             if valor_esperado is None or self.current_token[1] == valor_esperado:
                 self.advance()
             else:
                 valor = self.current_token[1]
-                raise SyntaxError(f"Esperado '{valor_esperado}', encontrado '{valor}'")
+                self.error(f"Esperado '{valor_esperado}', encontrado '{valor}'")
         else:
             valor = self.current_token[1] if self.current_token else "EOF"
-            raise SyntaxError(f"Esperado '{tipo_esperado}', encontrado '{valor}'")
+            self.error(f"Esperado '{tipo_esperado}', encontrado '{valor}'")
 
     def parse(self):
         while self.current_token is not None:
@@ -37,14 +44,12 @@ class Parser:
             self.parse_print()
         else:
             valor = self.current_token[1]
-            raise SyntaxError(f"Comando inesperado: '{valor}'")
+            self.error(f"Comando inesperado: '{valor}'")
 
     def parse_atribuicao(self):
         self.expect('Identificador')
         self.expect('Operador =')
         self.parse_expressao()
-        # Se quiser exigir ponto e vírgula ao final:
-        # self.expect('Ponto e Vírgula')
 
     def parse_if(self):
         self.expect('Palavra-chave C', 'if')
@@ -103,7 +108,7 @@ class Parser:
             self.parse_dicionario()
         else:
             valor = self.current_token[1]
-            raise SyntaxError(f"Termo inesperado: '{valor}'")
+            self.error(f"Termo inesperado: '{valor}'")
 
     def parse_lista(self):
         self.expect('Abre Colchete')
@@ -128,6 +133,6 @@ class Parser:
             self.advance()
         else:
             valor = self.current_token[1]
-            raise SyntaxError(f"Esperado chave em dicionário, encontrado '{valor}'")
+            self.error(f"Esperado chave em dicionário, encontrado '{valor}'")
         self.expect('Dois Pontos')
         self.parse_expressao()
