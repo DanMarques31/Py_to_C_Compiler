@@ -21,6 +21,7 @@ class PythonToCLexer:
             'else': 'else',
             'elif': 'else if',
             'while': 'while',
+            'in': 'in'  # ✅ adicionado aqui
         }
 
         self.operator_descriptions = {
@@ -50,7 +51,7 @@ class PythonToCLexer:
             ';': 'Ponto e Vírgula',
         }
 
-        self.ignore_tokens = {'ENCODING', 'ENDMARKER', 'INDENT', 'DEDENT', 'NL'}
+        self.ignore_tokens = {'ENCODING', 'ENDMARKER', 'INDENT', 'DEDENT', 'NL', 'NEWLINE', 'COMMENT'}
 
     def get_token_description(self, token_type, token_value):
         if token_type == 'OP':
