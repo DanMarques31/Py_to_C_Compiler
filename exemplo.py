@@ -1,17 +1,23 @@
-# Demonstração de operadores
-x = 5 + 3 * 2
-y = (10 % 3)
-z = x < y
-y = 0
-lista = [1, 2, 3]
-d = {'chave': 'valor'}
-print('Olá, mundo!')
+# Demonstração de variáveis e precedência de operadores
+a = 5 + 3 * 2
+b = (a + 1) / 3
 
-# Estruturas de controle
-if x > y:
-    print('x é maior')
+print("O valor de a e:", a)
+print("O valor de b e:", b)
+
+# Demonstração de estruturas de controle (if/else)
+if b > 3:
+    print("b e maior que 3")
 else:
-    print('y é maior ou igual')
+    print("b nao e maior que 3")
 
-for i in lista:
-    print('Item:', i)
+# Demonstração de listas e laços 'for'
+print("--- Contagem ---")
+numeros = [10.5, 20.2, 30.8, 40.1]
+soma = 0
+
+for item in numeros:
+    print("Item atual:", item)
+    soma = soma + item
+
+print("A soma dos itens e:", soma)
