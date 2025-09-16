@@ -1,13 +1,13 @@
-# Py_to_C_Lexer
+# Py_to_C_Compiler
 
-ANALISADOR LÉXICO PYTHON → C
+Compilador PYTHON → C
 =============================
 
 COMO USAR:
 
-1. Execute o lexer com um arquivo Python:
+1. Execute a main com um arquivo Python:
 
-  '''python lexer.py exemplo.py'''
+  '''python3 main.py exemplo.py'''
 
 EXEMPLO DE SAÍDA:
 
